@@ -13,4 +13,17 @@ class Person extends Model
     public function rent(){
         return $this->belongsTo(Rent::class,'id','person_id');
     }
+
+    public function typename(){
+        switch ($this->type) {
+            case 'student':
+                return 'Diák';
+            case 'professor':
+                return 'Professzor';
+            case 'fromElsewhere':
+                return 'Másik egyetemi';
+            case 'other':
+                return 'Külsős';
+        }
+    }
 }
