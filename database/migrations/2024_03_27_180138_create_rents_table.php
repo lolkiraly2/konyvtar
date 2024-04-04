@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('rent', function (Blueprint $table) {
             $table->id();
             $table->foreignId('person_id');
-            $table->integer('in');
+            $table->integer('inumber');
             $table->date('rentdate');
             $table->date('expiredate');
             $table->date('tookback')->nullable();
             $table->timestamps();
             $table->foreign('person_id')->references('id')->on('person');
-            $table->foreign('in')->references('inventorynumber')->on('book');
+            $table->foreign('inumber')->references('inventorynumber')->on('book');
         });
     }
 
