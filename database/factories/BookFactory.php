@@ -19,7 +19,7 @@ class BookFactory extends Factory
     {
         return [
             'inventorynumber' => fake()->unique()->numberBetween(1,1000),
-            'isbn' => Isbn::inRandomOrder()->first()->isbn
+            'isbn_id' => Isbn::inRandomOrder()->first()->isbn
         ];
     }
 }

@@ -20,7 +20,7 @@ class RentFactory extends Factory
     {
         return [
             'person_id' => Person::inRandomOrder()->first()->id,
-            'in' => Book::inRandomOrder()->first()->inventorynumber,
+            'inumber' => Book::inRandomOrder()->first()->inventorynumber,
             'rentdate' => now(),
             'expiredate' => now()->modify('+10 days'),
         ];

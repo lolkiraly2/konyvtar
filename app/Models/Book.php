@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Book extends Model
 {
     use HasFactory;
-    protected $table = "book";
+
 
     public function isbn(){
-        return $this->hasMany(Isbn::class,'isbn','isbn');
+        return $this->belongsTo(Isbn::class,'isbn_id','isbn');
     }
 
     public function rent(){
-        return $this->belongsTo(Rent::class,'inventorynumber','in');
+        return $this->hasMany(Rent::class,'inumber','inventorynumber');
     }
 }

@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('book', function (Blueprint $table) {
+        Schema::create('books', function (Blueprint $table) {
             $table->integer('inventorynumber')->primary();
-            $table->integer('isbn');
+            $table->integer('isbn_id');
             $table->timestamps();
-            $table->foreign('isbn')->references('isbn')->on('isbn');
+            $table->foreign('isbn_id')->references('isbn')->on('isbns')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

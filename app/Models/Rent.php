@@ -8,17 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Rent extends Model
 {
     use HasFactory;
-    protected $table = "rent";
 
     public function person(){
-        return $this->hasMany(Person::class,'id','person_id');
+        return $this->belongsTo(Person::class);
     }
 
     public function book(){
-        return $this->hasMany(Book::class,'inventorynumber','in');
+        return $this->belongsTo(Book::class,'inumber','inventorynumber');
     }
 
     public function isbn(){
-        return $this->hasManyThrough(Isbn::class,Book::class,'inventorynumber','isbn','in','isbn');
+        return $this->hasOneThrough(Isbn::class,Book::class,'inventorynumber', 'isbn', 'inumber', 'isbn_id');
     }
 }

@@ -35,9 +35,9 @@
                 @foreach($kolcsonzes as $sor)
                 <tr>
                     <td>{{ $sor->id }}</td>
-                    <td>{{ $sor->in }}</td>
-                    <td>{{ $sor->title }}</td>
-                    <td>{{ $sor->name}}</td>
+                    <td>{{ $sor->inumber }}</td>
+                    <td>{{ $sor->isbn->title }}</td>
+                    <td>{{ $sor->person->name}}</td>
                     <td>{{ $sor->rentdate}}</td>
                     <td>{{ $sor->expiredate}}</td>
                     <td>{{ $sor->tookback}}</td>

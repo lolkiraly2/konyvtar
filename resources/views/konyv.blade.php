@@ -33,11 +33,11 @@
                 @foreach($konyv as $sor)
                 <tr>
                     <td>{{ $sor->inventorynumber }}</td>
-                    <td>{{ $sor->isbn }}</td>
-                    <td>{{ $sor->title }}</td>
-                    <td>{{ $sor->writer }}</td>
-                    <td>{{ $sor->publisher }}</td>
-                    <td>{{ $sor->publishedAt }}</td>
+                    <td>{{ $sor->isbn->isbn }}</td>
+                    <td>{{ $sor->isbn->title }}</td>
+                    <td>{{ $sor->isbn->writer }}</td>
+                    <td>{{ $sor->isbn->publisher }}</td>
+                    <td>{{ $sor->isbn->publishedAt }}</td>
                 </tr>
                 @endforeach
 

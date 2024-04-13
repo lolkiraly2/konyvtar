@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Isbn extends Model
 {
     use HasFactory;
-    protected $table = "isbn";
+  
 
     public function book(){
-        return $this->belongsTo(Book::class,'isbn','isbn');
+        return $this->hasMany(Book::class,'isbn_id','isbn');
     }
 }

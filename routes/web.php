@@ -17,9 +17,7 @@ use App\Models\Rent;
 */
 
 Route::get('/kolcsonzesek', function () {
-    $table = Rent::join('person', 'rent.person_id', '=', 'person.id')
-        ->join('book', 'rent.in', '=', 'book.inventorynumber')
-        ->join('isbn', 'book.isbn', '=', 'isbn.isbn')->get();
+    $table = Rent::with('person','book','isbn')->get();
         
     return view("kolcsonzes", [
         'kolcsonzes' => $table
@@ -34,7 +32,7 @@ Route::get('/tagok', function () {
 });
 
 Route::get('/konyvek', function () {
-    $table = Book::join('isbn', 'book.isbn', '=', 'isbn.isbn')->get();
+    $table = Book::with('isbn')->get();
     return view("konyv", [
         'konyv' => $table
     ]);

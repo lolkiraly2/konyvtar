@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('isbn', function (Blueprint $table) {
+        Schema::create('isbns', function (Blueprint $table) {
             $table->integer('isbn')->primary();
             $table->string('writer',50);
             $table->string('title');

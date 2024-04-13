@@ -11,16 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rent', function (Blueprint $table) {
+        Schema::create('rents', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('person_id');
+            $table->foreignId('person_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->integer('inumber');
             $table->date('rentdate');
             $table->date('expiredate');
             $table->date('tookback')->nullable();
             $table->timestamps();
-            $table->foreign('person_id')->references('id')->on('person');
-            $table->foreign('inumber')->references('inventorynumber')->on('book');
+            $table->foreign('inumber')->references('inventorynumber')->on('books')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
