@@ -1,9 +1,10 @@
 <?php
 
 use App\Models\Book;
+use App\Models\Rent;
 use App\Models\Person;
 use Illuminate\Support\Facades\Route;
-use App\Models\Rent;
+use App\Http\Controllers\PersonController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,12 +25,7 @@ Route::get('/kolcsonzesek', function () {
     ]);
 });
 
-Route::get('/tagok', function () {
-    $table = Person::all();
-    return view("tag", [
-        'emberek' => $table
-    ]);
-});
+Route::resource('people', PersonController::class);
 
 Route::get('/konyvek', function () {
     $table = Book::with('isbn')->get();

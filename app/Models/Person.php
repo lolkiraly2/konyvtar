@@ -9,6 +9,7 @@ class Person extends Model
 {
     use HasFactory;
    
+    protected $guarded = ['created_at', 'updated_at'];
 
     public function rent(){
         return $this->hasMany(Rent::class);

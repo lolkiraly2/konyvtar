@@ -18,28 +18,28 @@
         </div>
 
         <div class="basis-6/8">
-            <button class="bg-indigo-600 p-1 mb-5">Új tag</button>
+            <button><a href="{{ route('people.create') }}">Új tag</a></button>
             <table>
 
                 <tr>
-                    <th>Olvasószám</th>
                     <th>Név</th>
                     <th>Irányítószám</th>
                     <th>Város</th>
                     <th>Utca</th>
                     <th>típus</th>
                     <th>elérhetőség</th>
+                    <th></th>
                 </tr>
 
-                @foreach($emberek as $sor)
+                @foreach($people as $person)
                 <tr>
-                    <td>{{ $sor->id }}</td>
-                    <td>{{ $sor->name }}</td>
-                    <td>{{ $sor->postcode}}</td>
-                    <td>{{ $sor->city }}</td>
-                    <td>{{ $sor->street}}</td>
-                    <td>{{ $sor->typename()}}</td>
-                    <td>{{ $sor->contact }}</td>
+                    <td><a href="{{ route('people.show', $person->id) }}">{{ $person->name }}</a></td>
+                    <td>{{ $person->postcode}}</td>
+                    <td>{{ $person->city }}</td>
+                    <td>{{ $person->street}}</td>
+                    <td>{{ $person->typename()}}</td>
+                    <td>{{ $person->contact }}</td>
+                    <td><a href="{{ route('people.edit', $person->id) }}">Szerkesztés</a></td>
                 </tr>
                 @endforeach
 

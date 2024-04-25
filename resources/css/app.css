@@ -15,4 +15,29 @@ td,th {
 table, th, td {
     border: 1px solid white;
     border-collapse: collapse;
-  }
+}
+
+.personform input,select  {
+    margin: 13px;
+    color: black;
+    background-color: white;
+    border-radius: 6px;
+    padding: 5px;
+}
+
+.personform input[type=submit] {
+    padding: 5px 10px;
+    transition:0.5s;
+    @apply hover:bg-gray-300;
+}
+
+
+#persondelete { 
+    background-color: red;
+    @apply hover:bg-red-600;
+}
+
+button{
+    transition:0.5s;
+    @apply bg-white p-1 mb-5 rounded-lg text-black hover:bg-gray-300;
+}
