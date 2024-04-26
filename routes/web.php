@@ -2,8 +2,8 @@
 
 use App\Models\Book;
 use App\Models\Rent;
-use App\Models\Person;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\IsbnController;
 use App\Http\Controllers\PersonController;
 
 /*
@@ -26,6 +26,8 @@ Route::get('/kolcsonzesek', function () {
 });
 
 Route::resource('people', PersonController::class);
+
+Route::resource('isbns', IsbnController::class);
 
 Route::get('/konyvek', function () {
     $table = Book::with('isbn')->get();

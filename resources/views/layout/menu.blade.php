@@ -7,6 +7,9 @@
   <button><a href="konyvek">Könyvek</a></button>
   </li>
   <li class="mr-6">
+  <button><a href="{{ route('isbns.index') }}">ISBN számok</a></button>
+  </li>
+  <li class="mr-6">
   <button><a href="{{ route('people.index') }}">Tagok</a></button>
   </li>
 </ul>

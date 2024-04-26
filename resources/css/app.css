@@ -17,6 +17,10 @@ table, th, td {
     border-collapse: collapse;
 }
 
+table a{
+    text-decoration:underline;
+}
+
 .personform input,select  {
     margin: 13px;
     color: black;
