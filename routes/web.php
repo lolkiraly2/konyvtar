@@ -3,6 +3,7 @@
 use App\Models\Book;
 use App\Models\Rent;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\IsbnController;
 use App\Http\Controllers\PersonController;
 
@@ -29,12 +30,7 @@ Route::resource('people', PersonController::class);
 
 Route::resource('isbns', IsbnController::class);
 
-Route::get('/konyvek', function () {
-    $table = Book::with('isbn')->get();
-    return view("konyv", [
-        'konyv' => $table
-    ]);
-});
+Route::resource('books', BookController::class);
 
 Route::get('/', function () {
     return view('index');

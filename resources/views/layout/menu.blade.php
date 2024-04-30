@@ -4,7 +4,7 @@
   <button><a href="kolcsonzesek">Kölcsönzések</a></button>
   </li>
   <li class="mr-6">
-  <button><a href="konyvek">Könyvek</a></button>
+  <button><a href="{{ route('books.index') }}">Könyvek</a></button>
   </li>
   <li class="mr-6">
   <button><a href="{{ route('isbns.index') }}">ISBN számok</a></button>

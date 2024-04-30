@@ -18,26 +18,22 @@
         </div>
 
         <div class="basis-6/8">
-            <button class="bg-indigo-600 p-1 mb-5">Új Kölcsönzés</button>
+            <button><a href="{{ route('books.create') }}">Új Könyv rögzítés</a></button>
             <table>
 
                 <tr>
-                    <th>Leltáriszám</th>
+                    <th>Leltári szám:</th>
                     <th>ISBN</th>
-                    <th>Címe</th>
-                    <th>Szerzője</th>
-                    <th>Kiadója</th>
-                    <th>Kiadás éve</th>
+                    <th>Cím</th>
+                    <th></th>
                 </tr>
 
-                @foreach($konyv as $sor)
+                @foreach($books as $book)
                 <tr>
-                    <td>{{ $sor->inventorynumber }}</td>
-                    <td>{{ $sor->isbn->isbn }}</td>
-                    <td>{{ $sor->isbn->title }}</td>
-                    <td>{{ $sor->isbn->writer }}</td>
-                    <td>{{ $sor->isbn->publisher }}</td>
-                    <td>{{ $sor->isbn->publishedAt }}</td>
+                    <td><a href="{{ route('books.show', $book->inventorynumber) }}">{{ $book->inventorynumber }}</a></td>
+                    <td>{{ $book->isbn->isbn}}</td>
+                    <td>{{ $book->isbn->title }}</td>
+                    <td><a href="{{ route('books.edit', $book->inventorynumber) }}">Szerkesztés</a></td>
                 </tr>
                 @endforeach
 
