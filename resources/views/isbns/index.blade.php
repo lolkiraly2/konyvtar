@@ -14,11 +14,26 @@
 
     <div class="flex flex-row w-4/5 mx-auto mt-10">
         <div class="basis-2/8">
-            szűrő felület helye
+            <!-- szűrő felület helye -->
+            <form action="{{ route('isbns.index') }}" class="personform">
+                <select name="Soption" id="Soption">
+                    <option value="isbn">ISBN szám</option>
+                    <option value="writer">Író</option>
+                    <option value="title">Cím</option>
+                    <option value="publisher">Kiadó</option>
+                    <option value="PublishedAt">Kiadás éve</option>
+                </select> <br>
+                <div id="personinput">
+                    <input type="text" name="value" id="value" placeholder="Szűrés feltétele"> <br>
+                </div>
+
+                <input type="submit" value="Szűrés">
+            </form>
         </div>
 
         <div class="basis-6/8">
             <button><a href="{{ route('isbns.create') }}">Új ISBN</a></button>
+            <p>@if(isset($value)) Szűrés: {{$option}}: {{$value}} @endif</p>
             <table>
 
                 <tr>

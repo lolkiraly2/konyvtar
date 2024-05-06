@@ -21,7 +21,7 @@ table a{
     text-decoration:underline;
 }
 
-.personform input,select  {
+.personform input,select, .search  {
     margin: 13px;
     color: black;
     background-color: white;
@@ -29,7 +29,7 @@ table a{
     padding: 5px;
 }
 
-.personform input[type=submit] {
+.personform input[type=submit], .search {
     padding: 5px 10px;
     transition:0.5s;
     @apply hover:bg-gray-300;

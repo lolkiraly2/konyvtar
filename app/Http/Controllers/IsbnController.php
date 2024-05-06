@@ -7,11 +7,43 @@ use Illuminate\Http\Request;
 
 class IsbnController extends Controller
 {
+    public function optionname($option)
+    {
+        switch ($option) {
+            case 'isbn':
+                return 'Isbn szám';
+            case 'writer':
+                return 'Író';
+            case 'title':
+                return 'Cím';
+            case 'publisher':
+                return 'Kiadó';
+            case 'publihedAt':
+                return 'Kiadási év';
+        }
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+        if (request()->has('value')) {
+            $option = request('Soption');
+            $data = request('value');
+
+            if($option == 'isbn') $isbns = Isbn::where($option, 'like', $data . '%')->get();
+            else $isbns = Isbn::where($option, 'like', '%' . $data . '%')->get();
+
+            
+            $option = $this->optionname($option);
+            //dd(compact('option', 'data','isbns'));
+            return view('isbns.index', [
+                'isbns' => $isbns,
+                'option' => $option,
+                'value' => $data
+            ]);
+        }
+
         return view('isbns.index', [
             'isbns' => Isbn::orderby('title')->get()
         ]);
@@ -45,7 +77,7 @@ class IsbnController extends Controller
      */
     public function show(Isbn $isbn)
     {
-        return view('isbns.show',[
+        return view('isbns.show', [
             'isbn' => $isbn
         ]);
     }
@@ -55,7 +87,7 @@ class IsbnController extends Controller
      */
     public function edit(Isbn $isbn)
     {
-        return view('isbns.edit',[
+        return view('isbns.edit', [
             'isbn' => $isbn
         ]);
     }

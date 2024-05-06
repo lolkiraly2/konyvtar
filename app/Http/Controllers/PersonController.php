@@ -7,11 +7,58 @@ use Illuminate\Http\Request;
 
 class PersonController extends Controller
 {
+    public function typename($type){
+        switch ($type) {
+            case 'student':
+                return 'Diák';
+            case 'professor':
+                return 'Professzor';
+            case 'fromElsewhere':
+                return 'Másik egyetemi';
+            case 'other':
+                return 'Külsős';
+        }
+    }
+    
+    public function optionname($option)
+    {
+        switch ($option) {
+            case 'name':
+                return 'Név';
+            case 'postcode':
+                return 'Irányítószám';
+            case 'city':
+                return 'Város';
+            case 'street':
+                return 'Utca';
+            case 'type':
+                return 'Típus';
+            case 'contact':
+                return 'Elérhetőség';
+        }
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+        if (request()->has('value')) {
+            $option = request('Soption');
+            $data = request('value');
+            
+            if($option == 'postcode') $people = Person::where($option, 'like', $data . '%')->get();
+            else $people = Person::where($option, 'like', '%' . $data . '%')->get();
+            //dd(compact('option', 'data','people'));
+            if($option == 'type') $data = $this->typename($data);
+            $option = $this->optionname($option);
+
+            return view('people.index', [
+                'people' => $people,
+                'option' => $option,
+                'value' => $data
+            ]);
+        }
+
         return view('people.index', [
             'people' => Person::orderby('name')->get()
         ]);
@@ -48,7 +95,7 @@ class PersonController extends Controller
      */
     public function show(Person $person)
     {
-        return view('people.show',[
+        return view('people.show', [
             'person' => $person
         ]);
     }

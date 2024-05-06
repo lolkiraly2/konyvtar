@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\Isbn;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
@@ -13,8 +14,24 @@ class BookController extends Controller
      */
     public function index()
     {
+        if(request()->has('value')){
+            $option = request('Soption');
+            $data = request('value');
+            
+            $books = DB::table('books')
+            ->select('*')
+            ->join('isbns', 'books.isbn_id', '=', 'isbns.isbn')
+            ->where($option, 'like', '%'. $data . '%')
+            ->get();
+        
+            //dd(compact('option', 'data','books'));
+            return view('books.index', [
+                'books' => $books
+            ]);
+        }
+
         return view('books.index', [
-            'books' => Book::orderby('inventorynumber')->with('isbn')->get()
+            'books' => DB::table('books')->select('*')->join('isbns', 'books.isbn_id', '=', 'isbns.isbn')->orderBy('inventorynumber')->get()
         ]);
     }
 
