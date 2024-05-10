@@ -13,12 +13,12 @@
     @include('layout.menu')
 
     <div class="flex flex-row w-4/5 mx-auto mt-10">
-        <div class="basis-2/8">
+        <!-- <div class="basis-2/8">
             szűrő felület helye
-        </div>
+        </div> -->
 
         <div class="basis-6/8">
-            <button class="bg-indigo-600 p-1 mb-5">Új Kölcsönzés</button>
+        <button><a href="{{ route('rents.create') }}">Új kölcsönzés</a></button>
             <table>
 
                 <tr>
@@ -28,19 +28,18 @@
                     <th>kölcsönző személy</th>
                     <th>Kikölcsönözte</th>
                     <th>Várt visszahozás</th>
-                    <th>Visszahozta</th>
-                    <!-- Add more columns if needed -->
+                    <th></th>
                 </tr>
 
-                @foreach($kolcsonzes as $sor)
+                @foreach($rents as $rent)
                 <tr>
-                    <td>{{ $sor->id }}</td>
-                    <td>{{ $sor->inumber }}</td>
-                    <td>{{ $sor->isbn->title }}</td>
-                    <td>{{ $sor->person->name}}</td>
-                    <td>{{ $sor->rentdate}}</td>
-                    <td>{{ $sor->expiredate}}</td>
-                    <td>{{ $sor->tookback}}</td>
+                    <td>{{ $rent->id }}</td>
+                    <td>{{ $rent->inumber }}</td>
+                    <td>{{ $rent->isbn->title }}</td>
+                    <td>{{ $rent->person->name}}</td>
+                    <td>{{ $rent->rentdate}}</td>
+                    <td>{{ $rent->expiredate}}</td>
+                    <td><a href="{{ route('rents.edit', $rent->id) }}">Szerkesztés</a></td>
                 </tr>
                 @endforeach
 

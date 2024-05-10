@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class PersonController extends Controller
 {
+    public function getPersonData(Request $request)
+    {
+        $personId = $request->input('person_id');
+        $person = Person::findOrFail($personId);
+
+        return response()->json($person);
+    }
+
     public function typename($type){
         switch ($type) {
             case 'student':

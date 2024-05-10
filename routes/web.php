@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\IsbnController;
 use App\Http\Controllers\PersonController;
+use App\Http\Controllers\RentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,19 +19,20 @@ use App\Http\Controllers\PersonController;
 |
 */
 
-Route::get('/kolcsonzesek', function () {
-    $table = Rent::with('person','book','isbn')->get();
-        
-    return view("kolcsonzes", [
-        'kolcsonzes' => $table
-    ]);
-});
 
 Route::resource('people', PersonController::class);
 
 Route::resource('isbns', IsbnController::class);
 
 Route::resource('books', BookController::class);
+
+route::resource('rents', RentController::class)->except([
+    'show'
+]);
+
+Route::get('get-person-data', [PersonController::class,'getPersonData'])->name('get.persondata');
+Route::get('get-book-data', [BookController::class,'getBookData'])->name('get.bookdata');
+
 
 Route::get('/', function () {
     return view('index');

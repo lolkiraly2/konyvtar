@@ -9,6 +9,18 @@ use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
+
+    public function getBookData(Request $request)
+    {
+        $inumber = $request->input('inumber');
+        $inumberdata = DB::table('books')
+            ->select('title')
+            ->join('isbns', 'books.isbn_id', '=', 'isbns.isbn')
+            ->where('inventorynumber',$inumber)
+            ->get();
+
+        return response()->json($inumberdata);
+    }
     /**
      * Display a listing of the resource.
      */
