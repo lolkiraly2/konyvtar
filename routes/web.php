@@ -5,8 +5,9 @@ use App\Models\Rent;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\IsbnController;
-use App\Http\Controllers\PersonController;
 use App\Http\Controllers\RentController;
+use App\Http\Controllers\PersonController;
+use App\Http\Controllers\RenthistoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,11 +28,16 @@ Route::resource('isbns', IsbnController::class);
 Route::resource('books', BookController::class);
 
 route::resource('rents', RentController::class)->except([
-    'show'
+    'show', 'destroy'
+]);
+
+route::resource('renthistories', RenthistoryController::class)->except([
+    'destroy'
 ]);
 
 Route::get('get-person-data', [PersonController::class,'getPersonData'])->name('get.persondata');
 Route::get('get-book-data', [BookController::class,'getBookData'])->name('get.bookdata');
+Route::get('get-isbn-data', [IsbnController::class,'getisbn'])->name('get.isbn');
 
 
 Route::get('/', function () {

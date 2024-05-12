@@ -1,6 +1,6 @@
 console.log('működök az új kölcsönzésbe');
 
-function maxbook(type){
+function maxbook(type) {
     switch (type) {
         case 'student':
             return 5;
@@ -13,7 +13,7 @@ function maxbook(type){
     }
 }
 
-function rentdays(type){
+function rentdays(type) {
     switch (type) {
         case 'student':
             return 60;
@@ -26,21 +26,21 @@ function rentdays(type){
     }
 }
 
-function SetExpireDate(type){
+function SetExpireDate(type) {
     let d = new Date();
-    console.log("now: " + d)
+    //console.log("now: " + d)
     d.setDate(d.getDate() + rentdays(type))
-    console.log(d)
-   let sd = d.toISOString().split('T')[0]
+    // console.log(d)
+    let sd = d.toISOString().split('T')[0]
     return sd
 }
 
-function CanRent(type,booknumber){
+function CanRent(type, booknumber) {
     // if(type === "professor") return true
-     if(maxbook(type) >= booknumber + 1) return true
+    if (maxbook(type) >= booknumber + 1) return true
     else return false
 }
 
-function remainrents(type,booknumber){
+function remainrents(type, booknumber) {
     return maxbook(type) - booknumber;
 }

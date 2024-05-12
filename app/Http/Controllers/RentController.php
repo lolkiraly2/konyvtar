@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Isbn;
 use App\Models\Person;
 use App\Models\Rent;
+use App\Models\Renthistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -26,7 +28,7 @@ class RentController extends Controller
     {
         return view('rents.create',[
             'people' => Person::orderby('name')->get(),
-            'inumbers' => DB::select("select inventorynumber from books except select inumber from rents")
+            'titles' => DB::select('SELECT DISTINCT title from books inner join isbns on isbn_id = isbn order by title')
         ]);
     }
 
@@ -61,17 +63,35 @@ class RentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Rent $rent)
     {
-        //
+        return view('rents.edit', [
+            'rent' => $rent
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Rent $rent)
     {
-        //
+        $kolcsonzo = Person::find(request('personid'));
+        $db = $kolcsonzo->borrowCount - 1;
+        $kolcsonzo->borrowCount = $db;
+        $kolcsonzo->save();
+
+        $rentb = Renthistory::create([
+            'id' => $rent->id,
+            'person_id' => request('personid'),
+            'inumber' => request('inumber'),
+            'rentdate' => request('rentdate'),
+            'expiredate' => request('expiredate'),
+            'tookback' => request('tookback')
+        ]);
+
+        $rent->delete();
+
+        return redirect(route('rents.index'));
     }
 
     /**

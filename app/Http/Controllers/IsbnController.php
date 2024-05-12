@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class IsbnController extends Controller
 {
+    public function getisbn(Request $request)
+    {
+        $title = $request->input('title');
+        $isbn = Isbn::where('title', $title)->pluck('isbn');
+
+        return response()->json($isbn);
+    }
+
     public function optionname($option)
     {
         switch ($option) {

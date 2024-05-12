@@ -4,22 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Isbn;
+use App\Models\Rent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
 
+    
+    //Visszaadja azon leltári számokat, amelyik még szabadok az adott címhez
     public function getBookData(Request $request)
     {
-        $inumber = $request->input('inumber');
-        $inumberdata = DB::table('books')
-            ->select('title')
-            ->join('isbns', 'books.isbn_id', '=', 'isbns.isbn')
-            ->where('inventorynumber',$inumber)
-            ->get();
+        $title = $request->input('title');
+         $isbn = Isbn::where('title',$title)->get();
 
-        return response()->json($inumberdata);
+        $book = DB::select('select inventorynumber from books inner join isbns on isbn_id = isbn where isbn_id = :isbnid EXCEPT
+        select inumber from rents inner join books on inumber = inventorynumber inner join isbns on isbn_id = isbn 
+        where isbn_id = :isbnid',['isbnid' => $isbn->first()->isbn]);
+
+        return response()->json($book);
     }
     /**
      * Display a listing of the resource.
@@ -53,7 +56,7 @@ class BookController extends Controller
     public function create()
     {
         return view('books.create',[
-            'isbns' => Isbn::pluck('isbn')->all()
+            'titles' => Isbn::orderby('title')->pluck('title')
         ]);
     }
 
