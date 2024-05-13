@@ -21,13 +21,15 @@ table a{
     text-decoration:underline;
 }
 
-.personform input,select, .search  {
+.personform input,select, .search ,.logout  {
     margin: 13px;
     color: black;
     background-color: white;
     border-radius: 6px;
     padding: 5px;
 }
+
+.logout{margin: 0px;}
 
 .personform input[type=submit], .search {
     padding: 5px 10px;

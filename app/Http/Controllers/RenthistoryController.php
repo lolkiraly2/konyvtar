@@ -13,7 +13,7 @@ class RenthistoryController extends Controller
     public function index()
     {
         return view('renthistories.index',[
-            'rents' => Renthistory::all()
+            'renthistories' => Renthistory::all()
         ]);
     }
 

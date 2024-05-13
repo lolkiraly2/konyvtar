@@ -1,8 +1,5 @@
 <?php
-
 use App\Http\Controllers\ProfileController;
-use App\Models\Book;
-use App\Models\Rent;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\IsbnController;
@@ -20,27 +17,27 @@ use App\Http\Controllers\RenthistoryController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::resource('people', PersonController::class);
+Route::resource('people', PersonController::class)->middleware(['auth', 'verified']);
 
-Route::resource('isbns', IsbnController::class);
+Route::resource('isbns', IsbnController::class)->middleware(['auth', 'verified']);
 
-Route::resource('books', BookController::class);
+Route::resource('books', BookController::class)->middleware(['auth', 'verified']);
 
 route::resource('rents', RentController::class)->except([
     'show', 'destroy'
-]);
+])->middleware(['auth', 'verified']);
 
 route::resource('renthistories', RenthistoryController::class)->except([
     'destroy'
 ]);
 
-Route::get('get-person-data', [PersonController::class,'getPersonData'])->name('get.persondata');
-Route::get('get-book-data', [BookController::class,'getBookData'])->name('get.bookdata');
-Route::get('get-isbn-data', [IsbnController::class,'getisbn'])->name('get.isbn');
+Route::get('get-person-data', [PersonController::class,'getPersonData'])->name('get.persondata')->middleware(['auth', 'verified']);
+Route::get('get-book-data', [BookController::class,'getBookData'])->name('get.bookdata')->middleware(['auth', 'verified']);
+Route::get('get-isbn-data', [IsbnController::class,'getisbn'])->name('get.isbn')->middleware(['auth', 'verified']);
 
 Route::get('/', function () {
     return view('index');
-});
+})->middleware(['auth']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

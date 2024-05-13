@@ -89,7 +89,8 @@ class BookController extends Controller
     {
         return view('books.edit',[
             'book' => $book,
-            'isbns' => Isbn::pluck('isbn')->all()
+            'titles' => Isbn::orderby('title')->pluck('title'),
+            'selectedtitle' => Isbn::where('isbn',$book->isbn_id)->pluck('title')
         ]);
     }
 

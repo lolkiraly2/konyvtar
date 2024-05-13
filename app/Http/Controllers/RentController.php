@@ -84,6 +84,7 @@ class RentController extends Controller
             'id' => $rent->id,
             'person_id' => request('personid'),
             'inumber' => request('inumber'),
+            'title' => request('booktitle'),
             'rentdate' => request('rentdate'),
             'expiredate' => request('expiredate'),
             'tookback' => request('tookback')

@@ -12,7 +12,7 @@
     @include('layout.header')
     @include('layout.menu')
 
-    <div class="flex flex-row w-4/5 mx-auto mt-10">
+    <div class="flex flex-row w-4/5 mx-auto mt-10 justify-center">
         <!-- <div class="basis-2/8">
             szűrő felület helye
         </div> -->
@@ -26,18 +26,18 @@
                     <th>Könyv címe</th>
                     <th>kölcsönző személy</th>
                     <th>Kikölcsönözte</th>
-                    <th>Várt visszahozás</th>
+                    <th>Visszahozta</th>
 
                 </tr>
 
-                @foreach($rents as $rent)
+                @foreach($renthistories as $renthistory)
                 <tr>
-                    <td>{{ $rent->id }}</td>
-                    <td>{{ $rent->person_id }}</td>
-                    <td>{{ $rent->inumber }}</td>
-                    <td>{{ $rent->rentdate}}</td>
-                    <td>{{ $rent->expiredate}}</td>
-                    <td>{{ $rent->tookback}}</td>
+                    <td>{{ $renthistory->id }}</td>
+                    <td>{{ $renthistory->inumber }}</td>
+                    <td>{{ $renthistory->title }}</td>
+                    <td>{{ $renthistory->findname() }}</td>
+                    <td>{{ $renthistory->rentdate}}</td>
+                    <td>{{ $renthistory->tookback}}</td>
                 </tr>
                 @endforeach
 

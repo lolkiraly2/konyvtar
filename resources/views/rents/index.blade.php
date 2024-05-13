@@ -12,7 +12,7 @@
     @include('layout.header')
     @include('layout.menu')
 
-    <div class="flex flex-row w-4/5 mx-auto mt-10">
+    <div class="flex flex-row w-4/5 mx-auto mt-10 justify-center">
         <!-- <div class="basis-2/8">
             szűrő felület helye
         </div> -->
