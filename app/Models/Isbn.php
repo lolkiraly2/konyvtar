@@ -16,4 +16,8 @@ class Isbn extends Model
     public function book(){
         return $this->hasMany(Book::class,'isbn_id','isbn');
     }
+
+    public function rent(){
+        return $this->hasManyThrough(Rent::class,Book::class,'isbn_id','inumber','isbn','inventorynumber');
+    }
 }

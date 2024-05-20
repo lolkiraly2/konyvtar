@@ -95,8 +95,13 @@ class IsbnController extends Controller
      */
     public function edit(Isbn $isbn)
     {
+        $rented = true;
+        if($isbn->rent->isEmpty())
+            $rented =false;
+
         return view('isbns.edit', [
-            'isbn' => $isbn
+            'isbn' => $isbn,
+            'rented' => $rented
         ]);
     }
 

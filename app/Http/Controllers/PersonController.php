@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Rent;
 use App\Models\Person;
+use App\Models\Renthistory;
 use Illuminate\Http\Request;
 
 class PersonController extends Controller
@@ -104,7 +106,9 @@ class PersonController extends Controller
     public function show(Person $person)
     {
         return view('people.show', [
-            'person' => $person
+            'person' => $person,
+            'rentingbooks' => Rent::where("person_id",$person->id)->get(),
+            'rentedbooks' => Renthistory::where("person_id",$person->id)->get()
         ]);
     }
 

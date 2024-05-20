@@ -43,11 +43,15 @@
             </div>
 
             <div>
+                @if($booked == false)
                 <form action="{{ route('books.destroy', $book->inventorynumber) }}" class="personform" method="post">
                     @csrf
                     @method('delete')
                     <input type="submit" id="persondelete" value="Törlés">
                 </form>
+                @else
+                <p>Kikölcsönzött könyv nem törölhető!</p>
+                @endif
             </div>
         </div>
     </div>

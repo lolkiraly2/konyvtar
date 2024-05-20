@@ -27,8 +27,8 @@ route::resource('rents', RentController::class)->except([
     'show', 'destroy'
 ])->middleware(['auth', 'verified']);
 
-route::resource('renthistories', RenthistoryController::class)->except([
-    'destroy'
+route::resource('renthistories', RenthistoryController::class)->only([
+    'index'
 ]);
 
 Route::get('get-person-data', [PersonController::class,'getPersonData'])->name('get.persondata')->middleware(['auth', 'verified']);

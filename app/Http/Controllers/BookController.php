@@ -87,10 +87,15 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
+        $booked = true;
+        if($book->rent->isEmpty())
+            $booked =false;
+
         return view('books.edit',[
             'book' => $book,
             'titles' => Isbn::orderby('title')->pluck('title'),
-            'selectedtitle' => Isbn::where('isbn',$book->isbn_id)->pluck('title')
+            'selectedtitle' => Isbn::where('isbn',$book->isbn_id)->pluck('title'),
+            'booked' => $booked
         ]);
     }
 

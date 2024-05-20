@@ -40,12 +40,15 @@
             </div>
 
             <div>
+                @if($rented == false)
                 <form action="{{ route('isbns.destroy', $isbn->isbn) }}" class="personform" method="post">
                     @csrf
                     @method('delete')
                     <input type="submit" id="persondelete" value="Törlés">
                 </form>
-
+                @else
+                <p>Van legalább 1 olyan könyv, amihez ez az ISBN szám tartozik, ezért nem törölhető!</p>
+                @endif
             </div>
         </div>
     </div>
