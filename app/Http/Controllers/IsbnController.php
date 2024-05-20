@@ -7,6 +7,32 @@ use Illuminate\Http\Request;
 
 class IsbnController extends Controller
 {
+    public function validateIsbn(): array
+    {
+        return request()->validate([
+                'isbn' => 'required|integer|digits:13|unique:isbns,isbn',
+                'writer' => 'required|max:50',
+                'title' => 'required',
+                'publisher' => 'required|max:50',
+                'publishedAt' => 'required|integer|between:1700,2024',
+            ],
+            [
+                'isbn.required' => "A ISBN szám nem lehet üres!",
+                'isbn.unique' => "A ISBN számnak egyedinek kell lennie!",
+                'isbn.integer' => "A ISBN szám csak számokból állhat!",
+                'isbn.digits'  => "A ISBN szám 13 számjegyből kell álljon!",
+                'writer.required' => "Az író nem lehet üres!",
+                'writer.max' => "Az író neve túl hosszú! (Maximum :max karakter)",
+                'title.required' => "A cím nem lehet üres!",
+                'publisher.required' => "Az kiadó neve nem lehet üres!",
+                'publisher.max' => "Az kiadó neve túl hosszú! (Maximum :max karakter)",
+                'publishedAt.required' => "A kiadás éve nem lehet üres!",
+                'publishedAt.integer' => "A kiadás évéhez évszámot adjon meg!",
+                'publishedAt.between' => "Az évszám :min és :max között lehet!"
+            ]
+        );
+    }
+
     public function getisbn(Request $request)
     {
         $title = $request->input('title');
@@ -70,13 +96,7 @@ class IsbnController extends Controller
      */
     public function store(Request $request)
     {
-        $isbn = Isbn::create([
-            'isbn' => request('isbn'),
-            'writer' => request('writer'),
-            'title' => request('title'),
-            'publisher' => request('publisher'),
-            'publishedAt' => request('publishedAt'),
-        ]);
+        Isbn::create($this->validateIsbn());
         return redirect(route('isbns.index'));
     }
 
@@ -110,13 +130,7 @@ class IsbnController extends Controller
      */
     public function update(Request $request, Isbn $isbn)
     {
-        $isbn->update([
-            'isbn' => request('isbn'),
-            'writer' => request('writer'),
-            'title' => request('title'),
-            'publisher' => request('publisher'),
-            'publishedAt' => request('publishedAt'),
-        ]);
+        $isbn->update($this->validateIsbn());
         return redirect(route('isbns.index'));
     }
 

@@ -21,12 +21,14 @@
                     <div class="grid grid-cols-2 items-center">
 
                         <label for="inventorynumber">Leltári szám:</label>
-                        <input type="text" id="inventorynumber" name="inventorynumber" value="{{$book->inventorynumber}}" require>
+                        <input type="text" id="inventorynumber" name="inventorynumber" value="{{$book->inventorynumber}}" require placeholder="100 és 9999999 közötti szám">
 
                         <label for="title">Könyv címe:</label>
                         <select name="title" id="title">
                             @foreach ($titles as $title)
-                            @if($title == $selectedtitle->first())
+                            @if(old('title') == $title)
+                            <option value="{{ $title }}" selected>{{ $title }}</option>
+                            @elseif(old('title') == "" && $title == $selectedtitle->first())
                             <option value="{{ $title }}" selected>{{ $title }}</option>
                             @else
                             <option value="{{ $title }}">{{ $title }}</option>
@@ -34,12 +36,13 @@
                             @endforeach
                         </select>
 
-                        <label for="isbn">ISBN:</label>
-                        <input type="text" id="isbn" name="isbn" require value="{{$book->isbn_id}}" readonly>
+                        <label for="isbn_id">ISBN:</label>
+                        <input type="text" id="isbn_id" name="isbn_id" require value="{{$book->isbn_id}}" readonly>
 
                         <input type="submit" value="Mentés" class="col-span-full">
                     </div>
                 </form>
+                @include('layout.errors')
             </div>
 
             <div>
@@ -66,11 +69,24 @@
             fetch("{{ route('get.isbn') }}?title=" + title)
                 .then(response => response.json())
                 .then(data => {
-                    document.getElementById('isbn').value = data
+                    document.getElementById('isbn_id').value = data
                 })
                 .catch(error => console.error('Error:', error));
         }
 
+    });
+
+    //isbn mező kitöltése az oldal megnyitása után
+    window.addEventListener("load", (event) => {
+        var title = document.getElementById('title').value;
+        if (title) {
+            fetch("{{ route('get.isbn') }}?title=" + title)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('isbn_id').value = data
+                })
+                .catch(error => console.error('Error:', error));
+        }
     });
 </script>
 

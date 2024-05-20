@@ -18,4 +18,13 @@ class Renthistory extends Model
         else
             return "Törölt tag";
     }
+
+    public function findtitle(){
+        $inumber = Book::find($this->inumber);
+        $title = $inumber->isbn->title;
+        if($title != null)
+            return $title;
+        else
+            return "Törölt könyv";
+    }
 }

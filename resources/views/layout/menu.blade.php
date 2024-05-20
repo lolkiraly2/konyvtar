@@ -24,3 +24,4 @@
     </li>
   </ul>
 </nav>
+<!-- <h1 class="text-center">Üdvözöllek, {{Auth::user()->name}}!</h1> -->

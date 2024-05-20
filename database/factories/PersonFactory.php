@@ -24,7 +24,7 @@ class PersonFactory extends Factory
             'number' => fake()->buildingNumber(),
             'type'  => fake()->randomElement(['student', 'professor', 'fromElsewhere','other']),
             'contact' => fake()->email(),
-            'borrowCount' => 3
+            'borrowCount' => 0
         ];
     }
 }

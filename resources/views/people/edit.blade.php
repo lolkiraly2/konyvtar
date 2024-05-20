@@ -59,9 +59,12 @@ function typename($type)
                         <label for="contact">Elérhetőség: </label>
                         <input type="email" id="contact" name="contact" require value="{{$person->contact}}">
 
+                        <input type="number" name="borrowCount" id="borrowCount" value="{{$person->borrowCount}}" readonly hidden>
+
                         <input type="submit" value="Mentés" class="col-span-full">
                     </div>
                 </form>
+                @include('layout.errors')
             </div>
 
             <div>

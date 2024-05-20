@@ -16,8 +16,10 @@ class IsbnFactory extends Factory
      */
     public function definition(): array
     {
+
+        $isbn = strval(fake()->unique()->randomNumber(6, true)) . strval(fake()->unique()->randomNumber(7, true));
         return [
-            'isbn' => fake()->unique()->randomNumber(5, true),
+            'isbn' =>  $isbn,
             'writer' => fake()->name(),
             'title' => fake()->slug(),
             'publisher' => fake()->company(),

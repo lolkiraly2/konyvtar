@@ -66,7 +66,7 @@
                     <tr>
                         <td>{{ $rentedbook->id }}</td>
                         <td>{{ $rentedbook->inumber }}</td>
-                        <td>{{ $rentedbook->title }}</td>
+                        <td>{{ $rentedbook->findtitle() }}</td>
                         <td>{{ $rentedbook->rentdate}}</td>
                         <td>{{ $rentedbook->tookback}}</td>
                     </tr>

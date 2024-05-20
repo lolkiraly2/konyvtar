@@ -37,6 +37,7 @@
                         <input type="submit" value="Mentés" class="col-span-full">
                     </div>
                 </form>
+                @include('layout.errors')
             </div>
 
             <div>
@@ -47,7 +48,7 @@
                     <input type="submit" id="persondelete" value="Törlés">
                 </form>
                 @else
-                <p>Van legalább 1 olyan könyv, amihez ez az ISBN szám tartozik, ezért nem törölhető!</p>
+                <p>Van legalább 1 olyan könyv, amihez ez az ISBN szám tartozik, és ki van kölcsönözve, ezért nem törölhető!</p>
                 @endif
             </div>
         </div>

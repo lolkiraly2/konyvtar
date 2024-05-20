@@ -19,19 +19,19 @@
                     @csrf
                     <div class="grid grid-cols-2 items-center">
                         <label for="name">Név: </label>
-                        <input type="text" id="name" name="name" require>
+                        <input type="text" id="name" name="name" require value="{{old('name')}}">
 
                         <label for="postcode">Irányítószám: </label>
-                        <input type="text" id="postcode" name="postcode" require>
+                        <input type="text" id="postcode" name="postcode" require value="{{old('postcode')}}">
 
                         <label for="city">Város: </label>
-                        <input type="text" id="city" name="city" require>
+                        <input type="text" id="city" name="city" require value="{{old('city')}}">
 
                         <label for="street">Utca</label>
-                        <input type="text" id="street" name="street" require>
+                        <input type="text" id="street" name="street" require value="{{old('street')}}">
 
                         <label for="number">Házszám</label>
-                        <input type="text" id="number" name="number" require>
+                        <input type="text" id="number" name="number" require value="{{old('number')}}">
 
                         <label for="type">Kategória:</label>
                         <select name="type" id="type">
@@ -42,12 +42,15 @@
                         </select>
 
                         <label for="contact">Elérhetőség: </label>
-                        <input type="email" id="contact" name="contact">
+                        <input type="email" id="contact" name="contact" value="{{old('contact')}}">
+
+                        <input type="number" name="borrowCount" id="borrowCount" value="0" readonly hidden>
 
                         <input type="submit" value="Mentés" class="col-span-full">
                     </div>
                 </form>
             </div>
+            @include('layout.errors')
         </div>
     </div>
 </body>

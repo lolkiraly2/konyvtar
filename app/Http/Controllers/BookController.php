@@ -11,7 +11,19 @@ use Illuminate\Support\Facades\DB;
 class BookController extends Controller
 {
 
-    
+    public function validateBook(): array
+    {
+        return request()->validate([
+                'inventorynumber' => 'required|integer|unique:books,inventorynumber',
+                'isbn_id' => 'required',
+            ],
+            [
+                'inventorynumber.required' => "A leltári szám nem lehet üres!",
+                'inventorynumber.integer' => "A leltári szám csak számokból állhat!",
+                'inventorynumber.unique' => "A leltári számnak egyedinek kell lennie!"
+            ]
+        );
+    }    
     //Visszaadja azon leltári számokat, amelyik még szabadok az adott címhez
     public function getBookData(Request $request)
     {
@@ -65,10 +77,7 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        $book = Book::create([
-            'inventorynumber' => request('inventorynumber'),
-            'isbn_id' => request('isbn'),
-        ]);
+        Book::create($this->validateBook());
         return redirect(route('books.index'));
     }
 
@@ -102,12 +111,9 @@ class BookController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Book $book)
+    public function update(Book $book)
     {
-        $book->update([
-            'inventorynumber' => request('inventorynumber'),
-            'isbn_id' => request('isbn'),
-        ]);
+        $book->update($this->validateBook());
         return redirect(route('books.index'));
     }
 

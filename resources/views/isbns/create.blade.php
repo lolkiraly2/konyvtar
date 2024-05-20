@@ -19,23 +19,24 @@
                     @csrf
                     <div class="grid grid-cols-2 items-center">
                         <label for="isbn">ISBN szám: </label>
-                        <input type="text" id="isbn" name="isbn" require>
+                        <input type="text" id="isbn" name="isbn" require value="{{old('isbn')}}">
 
                         <label for="writer">Író: </label>
-                        <input type="text" id="writer" name="writer" require>
+                        <input type="text" id="writer" name="writer" require value="{{old('writer')}}">
 
                         <label for="title">Cím: </label>
-                        <input type="text" id="title" name="title" require>
+                        <input type="text" id="title" name="title" require value="{{old('title')}}">
 
                         <label for="publisher">Kiadó:</label>
-                        <input type="text" id="publisher" name="publisher" require>
+                        <input type="text" id="publisher" name="publisher" require value="{{old('publisher')}}">
 
                         <label for="publishedAt">Kiadás éve:</label>
-                        <input type="text" id="publishedAt" name="publishedAt" require>
+                        <input type="text" id="publishedAt" name="publishedAt" require value="{{old('publishedAt')}}">
 
                         <input type="submit" value="Mentés" class="col-span-full">
                     </div>
                 </form>
+                @include('layout.errors')
             </div>
         </div>
     </div>

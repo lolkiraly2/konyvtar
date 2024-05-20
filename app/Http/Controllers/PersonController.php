@@ -9,6 +9,35 @@ use Illuminate\Http\Request;
 
 class PersonController extends Controller
 {
+    public function validatePerson(): array
+    {
+        return request()->validate([
+                'name' => 'required|max:50',
+                'postcode' => 'required|integer|between:1000,9999',
+                'city' => 'required|max:30',
+                'street' => 'required',
+                'number' => 'required|integer',
+                'type' => 'required',
+                'contact' => 'required|email',
+                'borrowCount' => 'integer'
+            ],
+            [
+                'name.required' => "A név nem lehet üres!",
+                'name.max' => "Túl hosszú név! (Maximum: :max karakter)!",
+                'postcode.required' => "Az irányítószám nem lehet üres!",
+                'postcode.integer' => "Az irányítószám csak szám lehet!",
+                'postcode.between' => "Irányítószámnak :min és :max közötti számot adjon meg!",
+                'city.required' => "A város nem lehet üres!",
+                'city.max' => "Túl hosszú városnév (Maximum: :max karakter)!",
+                'street.required' => "Az utca nem lehet üres!",
+                'number.required' => "A házszám nem lehet üres!",
+                'number.integer' => "Házszám csak szám lehet!",
+                'contact.required' => "Az email nem lehet üres!",
+                'contact.email' => "Hibás formátum!"
+            ]
+        );
+    }
+
     public function getPersonData(Request $request)
     {
         $personId = $request->input('person_id');
@@ -17,7 +46,8 @@ class PersonController extends Controller
         return response()->json($person);
     }
 
-    public function typename($type){
+    public function typename($type)
+    {
         switch ($type) {
             case 'student':
                 return 'Diák';
@@ -29,7 +59,7 @@ class PersonController extends Controller
                 return 'Külsős';
         }
     }
-    
+
     public function optionname($option)
     {
         switch ($option) {
@@ -55,11 +85,11 @@ class PersonController extends Controller
         if (request()->has('value')) {
             $option = request('Soption');
             $data = request('value');
-            
-            if($option == 'postcode') $people = Person::where($option, 'like', $data . '%')->get();
+
+            if ($option == 'postcode') $people = Person::where($option, 'like', $data . '%')->get();
             else $people = Person::where($option, 'like', '%' . $data . '%')->get();
             //dd(compact('option', 'data','people'));
-            if($option == 'type') $data = $this->typename($data);
+            if ($option == 'type') $data = $this->typename($data);
             $option = $this->optionname($option);
 
             return view('people.index', [
@@ -87,16 +117,7 @@ class PersonController extends Controller
      */
     public function store(Request $request)
     {
-        $person = Person::create([
-            'name' => request('name'),
-            'postcode' => request('postcode'),
-            'city' => request('city'),
-            'street' => request('street'),
-            'number' => request('number'),
-            'type' => request('type'),
-            'contact' => request('contact'),
-            'borrowCount' => 0
-        ]);
+        Person::create($this->validatePerson());
         return redirect(route('people.index'));
     }
 
@@ -107,8 +128,8 @@ class PersonController extends Controller
     {
         return view('people.show', [
             'person' => $person,
-            'rentingbooks' => Rent::where("person_id",$person->id)->get(),
-            'rentedbooks' => Renthistory::where("person_id",$person->id)->get()
+            'rentingbooks' => Rent::where("person_id", $person->id)->get(),
+            'rentedbooks' => Renthistory::where("person_id", $person->id)->get()
         ]);
     }
 
@@ -127,16 +148,7 @@ class PersonController extends Controller
      */
     public function update(Person $person)
     {
-        $person->update([
-            'name' => request('name'),
-            'postcode' => request('postcode'),
-            'city' => request('city'),
-            'street' => request('street'),
-            'number' => request('number'),
-            'type' => request('type'),
-            'contact' => request('contact'),
-            'borrowCount' => 0
-        ]);
+        $person->update($this->validatePerson());
         return redirect(route('people.index'));
     }
 

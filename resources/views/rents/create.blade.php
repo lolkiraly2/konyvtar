@@ -71,12 +71,12 @@
                     if (data.type !== "professor") {           
                         if (CanRent(data.type, data.borrowCount)) {
                             let number = remainrents(data.type, data.borrowCount)
-                            document.getElementById('personData').innerHTML = "Az illető még " + number + " könyvet kölcsönözhet"
+                            document.getElementById('personData').innerHTML = "Az illető még " + number + " könyvet kölcsönözhet!"
                             document.getElementById('expiredate').value = SetExpireDate(data.type);
                             kolcsonozhet = true
 
                         } else {
-                            document.getElementById('personData').innerHTML = "Az illető már nem kölcsönözhet több könyvet";
+                            document.getElementById('personData').innerHTML = "Az illető már nem kölcsönözhet több könyvet!";
                             document.getElementById('expiredate').value = "";
                             kolcsonozhet = false
                         }

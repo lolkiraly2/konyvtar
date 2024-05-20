@@ -34,7 +34,7 @@
                 <tr>
                     <td>{{ $renthistory->id }}</td>
                     <td>{{ $renthistory->inumber }}</td>
-                    <td>{{ $renthistory->title }}</td>
+                    <td>{{ $renthistory->findtitle() }}</td>
                     <td>{{ $renthistory->findname() }}</td>
                     <td>{{ $renthistory->rentdate}}</td>
                     <td>{{ $renthistory->tookback}}</td>
