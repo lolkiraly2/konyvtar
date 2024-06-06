@@ -138,9 +138,13 @@ class PersonController extends Controller
      */
     public function edit(Person $person)
     {
+        $hasbook = true;
+        if($person->rent->isEmpty())
+            $hasbook =false;
+
         $types = ['student', 'professor', 'fromElsewhere', 'other'];
 
-        return view('people.edit', compact('person', 'types'));
+        return view('people.edit', compact('person', 'types', 'hasbook'));
     }
 
     /**

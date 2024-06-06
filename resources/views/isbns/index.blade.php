@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Könyvtár</title>
+    <title>ISBN számok</title>
     @vite('resources/css/app.css')
 </head>
 
@@ -38,8 +38,8 @@
 
                 <tr>
                     <th>ISBN szám</th>
-                    <th>Író</th>
                     <th>Cím</th>
+                    <th>Író</th>
                     <th>Kiadó</th>
                     <th>Kiadás éve</th>
                     <th></th>
@@ -48,8 +48,8 @@
                 @foreach($isbns as $isbn)
                 <tr>
                     <td><a href="{{ route('isbns.show', $isbn->isbn) }}">{{ $isbn->isbn }}</a></td>
-                    <td>{{ $isbn->writer}}</td>
                     <td>{{ $isbn->title }}</td>
+                    <td>{{ $isbn->writer}}</td>
                     <td>{{ $isbn->publisher}}</td>
                     <td>{{ $isbn->publishedAt}}</td>
                     <td><a href="{{ route('isbns.edit', $isbn->isbn) }}">Szerkesztés</a></td>

@@ -19,7 +19,7 @@ function typename($type)
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Könyvtár</title>
+    <title>Tagok szerkesztése</title>
     @vite('resources/css/app.css')
 </head>
 
@@ -68,13 +68,17 @@ function typename($type)
             </div>
 
             <div>
+                @if($hasbook == false)
                 <form action="{{ route('people.destroy', $person->id) }}" class="personform" method="post">
                     @csrf
                     @method('delete')
                     <input type="submit" id="persondelete" value="Törlés">
                 </form>
-
+                @else
+                <p>A tag nem törölhető, mert még van nála könyv!</p>
+                @endif
             </div>
+            
 
         </div>
     </div>
